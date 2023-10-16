@@ -5,6 +5,8 @@ import BeautifulScreen from "./BeautifulScreen";
 import NumberButton from "./NumberButton";
 import OperatorButton from "./OperatorButton";
 import EqualButton from "./EqualButton";
+import FunctionButton from "./FunctionButton";
+import ItSOverNineThousand from "./ItSOverNineThousand";
 
 function Calculator() {
   const listNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -14,10 +16,14 @@ function Calculator() {
   const [result, setResult] = useState("");
 
   const childToParent = (value) => {
-    if (listNumber.includes(value)) {
+    if (listNumber.includes(value) || listOperator.includes(value)) {
       addNumber(value);
-    } else if (listOperator.includes(value)) {
-      addNumber(value);
+    } else if (value === "C") {
+      removeOperation();
+    } else if (value === "Del") {
+      deleteLast();
+    } else if (value === "save") {
+      save();
     }
   };
 
@@ -26,14 +32,28 @@ function Calculator() {
     setOperation(concat);
   }
 
+  function removeOperation() {
+    setOperation("");
+    setResult("");
+  }
+
+  function deleteLast() {
+    let newOperation = operation.slice(0, -1);
+    setOperation(newOperation);
+  }
+
+  function save() {
+    console.log("SAVE!");
+  }
+
   const calculate = (operation) => {
     // récupérer les nombres et les opérateurs
     let numbers = operation.split(/[^0-9]/);
-    console.log("numbers Calculate", numbers);
+
     // récupérer les opérateurs et pas les espaces
     let operators = operation.split(/[0-9]/);
     operators = operators.filter((operator) => operator !== "");
-    console.log("operators Calculate", operators);
+
     // calculer le résultat
     let result;
     // parcourir les opérateurs, dès qu'on trouve une multiplication ou une division, on la fait
@@ -78,6 +98,7 @@ function Calculator() {
       <div className={"calculator"}>
         <BeautifulScreen operation={operation} result={result} />
         <div className={"buttonsStyle"}>
+          <FunctionButton handleClick={childToParent} />
           <div className={"buttons"}>
             <NumberButton handleClick={childToParent} />
             <OperatorButton handleClick={childToParent} />
@@ -85,6 +106,7 @@ function Calculator() {
           </div>
         </div>
       </div>
+      <ItSOverNineThousand result={result} />
     </div>
   );
 }
