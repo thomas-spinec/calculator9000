@@ -5,13 +5,13 @@ import "./App.css";
 
 // components
 import Title from "./components/Title";
+import Calculator from "./components/Calculator";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Title />
+      <Calculator />
     </>
   );
 }
