@@ -16,14 +16,14 @@ function Calculator() {
   const [result, setResult] = useState("");
 
   const childToParent = (value) => {
-    if (listNumber.includes(value) || listOperator.includes(value)) {
-      addNumber(value);
-    } else if (value === "C") {
+    if (value === "C") {
       removeOperation();
     } else if (value === "Del") {
       deleteLast();
     } else if (value === "save") {
       save();
+    } else {
+      addNumber(value);
     }
   };
 
@@ -47,12 +47,22 @@ function Calculator() {
   }
 
   const calculate = (operation) => {
-    // récupérer les nombres et les opérateurs
-    let numbers = operation.split(/[^0-9]/);
+    // récupérer les nombres (entier ou décimal) et les opérateurs
+    // let numbers = operation.split(/[^0-9]/);
+    let numbers = operation.split(/[^\d\.]/);
+    // si numbers ne contient qu'un seul élément, on rajoute un 0 après
+    if (numbers.length === 1) {
+      numbers.push(0);
+    }
 
     // récupérer les opérateurs et pas les espaces
-    let operators = operation.split(/[0-9]/);
+    // let operators = operation.split(/[0-9]/);
+    let operators = operation.split(/[\d\.]/);
     operators = operators.filter((operator) => operator !== "");
+    // si operators ne contient rien, on rajoute un + après
+    if (operators.length === 0) {
+      operators.push("+");
+    }
 
     // calculer le résultat
     let result;
@@ -74,9 +84,9 @@ function Calculator() {
     for (let i = 0; i < operators.length; i++) {
       if (operators[i] === "+" || operators[i] === "-") {
         if (operators[i] === "+") {
-          result = parseInt(numbers[i]) + parseInt(numbers[i + 1]);
+          result = parseFloat(numbers[i]) + parseFloat(numbers[i + 1]);
         } else {
-          result = parseInt(numbers[i]) - parseInt(numbers[i + 1]);
+          result = parseFloat(numbers[i]) - parseFloat(numbers[i + 1]);
         }
         numbers.splice(i, 2, result);
         operators.splice(i, 1);

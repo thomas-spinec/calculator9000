@@ -8,6 +8,7 @@
 body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
+  /* background-color: rgba(196, 222, 249, 0.657); */
 }
 
 /* Calculator CSS */
@@ -15,13 +16,17 @@ body {
 .title {
   text-align: center;
   margin: 40px;
+  /* color: #fff; */
 }
 
 .calculator {
-  /*background-color: #fff;*/
+  /* background-color: #fff; */
   background-color: transparent;
+  /* background-color: rgb(145, 150, 156); */
+
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+  box-shadow: 0 0 10px rgba(0, 0, 0);
   /*margin: 0 auto;*/
   max-width: 400px;
   padding: 20px;
@@ -94,9 +99,9 @@ body {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* le dernier bouton des nombres  */
-.calculator .buttons .numbers button:last-child {
-  grid-column: span 3;
+/* l'avant dernier bouton des nombres  */
+.calculator .buttons .numbers button:nth-child(10) {
+  grid-column: span 2;
 }
 
 /* le bouton égal */
