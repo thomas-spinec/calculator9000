@@ -7,6 +7,7 @@ import OperatorButton from "./OperatorButton";
 import EqualButton from "./EqualButton";
 import FunctionButton from "./FunctionButton";
 import ItSOverNineThousand from "./ItSOverNineThousand";
+import Alert from "./Alert";
 
 function Calculator() {
   const listNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -15,6 +16,9 @@ function Calculator() {
   const [operation, setOperation] = useState("");
   const [result, setResult] = useState("");
 
+  const [alert, setAlert] = useState(false);
+  const [easter, setEaster] = useState(false);
+
   const childToParent = (value) => {
     if (value === "C") {
       removeOperation();
@@ -22,6 +26,11 @@ function Calculator() {
       deleteLast();
     } else if (value === "save") {
       save();
+    } else if (
+      listOperator.includes(value) &&
+      listOperator.includes(operation[operation.length - 1])
+    ) {
+      setAlert(true);
     } else {
       addNumber(value);
     }
@@ -97,6 +106,11 @@ function Calculator() {
     // afficher le résultat en string
     let resultString = result.toString();
     setResult(resultString);
+
+    // si le résultat est supérieur à 9000, on affiche l'easter egg
+    if (result > 9000) {
+      setEaster(true);
+    }
   };
 
   const equal = () => {
@@ -116,7 +130,8 @@ function Calculator() {
           </div>
         </div>
       </div>
-      <ItSOverNineThousand result={result} />
+      {easter && <ItSOverNineThousand setEaster={setEaster} />}
+      {alert && <Alert setAlert={setAlert} />}
     </div>
   );
 }

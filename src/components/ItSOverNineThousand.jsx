@@ -1,26 +1,17 @@
-function ItSOverNineThousand({ result }) {
-  if (result > 9000) {
-    return (
-      <>
-        <div className={"easter"}>
+import gif from "../assets/img/giphy.gif";
+
+function ItSOverNineThousand({ setEaster }) {
+  return (
+    <>
+      <div className="alert">
+        <div className="easter">
           <h1>It's Over 9000 !!!</h1>
-          <iframe
-            src="https://giphy.com/embed/tPKoWQJk3cEbC"
-            width="480"
-            height="359"
-            frameBorder="0"
-            className="giphy-embed"
-            allowFullScreen
-          ></iframe>
-          <p>
-            <a href="https://giphy.com/gifs/dc-cinematic-universe-tPKoWQJk3cEbC">
-              via GIPHY
-            </a>
-          </p>
+          <img src={gif} alt="It's Over 9000 !!!" />
+          <button onClick={() => setEaster(false)}>Kaiôken !!</button>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 export default ItSOverNineThousand;
