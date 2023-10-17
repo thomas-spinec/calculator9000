@@ -1,7 +1,7 @@
 import Button from "./Button.jsx";
 
 function FunctionButton({ handleClick }) {
-  const functions = ["C", "save", "Del"];
+  const functions = ["C", "save", "<"];
   const listFunction = functions.map((func, id) => {
     return <Button handleClick={handleClick} value={func} key={id} />;
   });

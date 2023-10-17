@@ -18,7 +18,7 @@ function Calculator() {
   const childToParent = (value) => {
     if (value === "C") {
       removeOperation();
-    } else if (value === "Del") {
+    } else if (value === "<") {
       deleteLast();
     } else if (value === "save") {
       save();
