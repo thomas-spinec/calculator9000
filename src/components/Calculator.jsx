@@ -24,7 +24,7 @@ function Calculator() {
       removeOperation();
     } else if (value === "<") {
       deleteLast();
-    } else if (value === "save") {
+    } else if (value === "M") {
       save();
     } else if (
       listOperator.includes(value) &&
